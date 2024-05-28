@@ -1,6 +1,6 @@
 ﻿using DesignPatternImplementation;
 
-//--------  For single thread ------------
+//--------  Singleton in Single Thread ------------
 //var firstInstance = Singleton.GetInstance();
 //firstInstance.Print("Print from first instance.");
 
@@ -9,7 +9,7 @@
 
 
 
-//----------------- For multiple thread ------------------
+//----------------- Singleton in Thread Safe ------------------
 Parallel.Invoke
     (
                 () => SingletonThreadSafe.GetInstance().Print("Print from first instance."),
