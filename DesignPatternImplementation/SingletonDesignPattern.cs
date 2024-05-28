@@ -1,5 +1,6 @@
 ﻿namespace DesignPatternImplementation
 {
+    //-------------- Singleton in single thread ----------------------------
     // 1. Make constructor private
     // 2. Create a method to get the instance which will public and static
     // 3. Declare the class as sealed
