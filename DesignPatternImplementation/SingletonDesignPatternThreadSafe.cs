@@ -1,5 +1,6 @@
 ﻿namespace DesignPatternImplementation
 {
+    //-------------- Singleton in thread safe ----------------------------
     // 1. Make thread safe - using Lock
     // 2. Make thread safe - using Double-Check Locking
 
