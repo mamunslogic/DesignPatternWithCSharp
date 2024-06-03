@@ -4,8 +4,6 @@
 //Let us see how we can implement the above example using the Factory Method Design Pattern in C#:
 
 
-
-
 //Abstract Product: This is the interface or abstract class defining the product the factory method will create.
 //Concrete Product: These are the specific implementations of the Product interface or abstract class.
 //Abstract Factory or Creator: This abstract class or interface declares the FactoryMethod().
