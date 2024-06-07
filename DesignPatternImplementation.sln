@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionDesignPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDesignPatternInWebProject", "DependencyInjectionDesignPatternWithUnity\DependencyInjectionDesignPatternInWebProject.csproj", "{00FE474C-6C12-4DF2-8C00-3979DD454CF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryDesignPattern", "RepositoryDesignPattern\RepositoryDesignPattern.csproj", "{9C4DE302-FDE0-4363-BA00-6A21133E15D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{00FE474C-6C12-4DF2-8C00-3979DD454CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00FE474C-6C12-4DF2-8C00-3979DD454CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00FE474C-6C12-4DF2-8C00-3979DD454CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C4DE302-FDE0-4363-BA00-6A21133E15D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C4DE302-FDE0-4363-BA00-6A21133E15D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C4DE302-FDE0-4363-BA00-6A21133E15D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C4DE302-FDE0-4363-BA00-6A21133E15D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
