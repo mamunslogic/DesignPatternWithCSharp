@@ -7,11 +7,16 @@ namespace RepositoryDesignPattern.Controllers
 {
     public class EmployeeController : Controller
     {
-        private IEmployeeRepository _employeeRepositoy;
+        //private IEmployeeRepository _employeeRepositoy;
+
+        private IGenericRepository<Employee> _genericReposity;
+        private IEmployeeRepository _employeeRepository;
 
         public EmployeeController()
         {
-            _employeeRepositoy = new EmployeeRepository();
+            //_employeeRepositoy = new EmployeeRepository();
+            _genericReposity = new GenericRepository<Employee>();
+            _employeeRepository = new EmployeeRepository();
         }
 
         //public EmployeeController(IEmployeeRepository employeeRepositoy)
@@ -21,7 +26,8 @@ namespace RepositoryDesignPattern.Controllers
 
         public ActionResult Index()
         {
-            return View(_employeeRepositoy.GetAll());
+            //return View(_genericReposity.GetAll());
+            return View(_employeeRepository.GetEmployeesByGender("Male"));
         }
 
         public ActionResult Details(int? id)
@@ -30,7 +36,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employeeRepositoy.GetById((int)id);
+            Employee employee = _genericReposity.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -49,8 +55,8 @@ namespace RepositoryDesignPattern.Controllers
         {
             if (ModelState.IsValid)
             {
-                _employeeRepositoy.Insert(employee);
-                _employeeRepositoy.Save();
+                _genericReposity.Insert(employee);
+                _genericReposity.Save();
                 return RedirectToAction("Index");
             }
 
@@ -63,7 +69,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employeeRepositoy.GetById((int)id);
+            Employee employee = _genericReposity.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -77,8 +83,8 @@ namespace RepositoryDesignPattern.Controllers
         {
             if (ModelState.IsValid)
             {
-                _employeeRepositoy.Update(employee);
-                _employeeRepositoy.Save();
+                _genericReposity.Update(employee);
+                _genericReposity.Save();
                 return RedirectToAction("Index");
             }
             return View(employee);
@@ -90,7 +96,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employeeRepositoy.GetById((int)id);
+            Employee employee = _genericReposity.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -102,8 +108,8 @@ namespace RepositoryDesignPattern.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _employeeRepositoy.Delete(id);
-            _employeeRepositoy.Save();
+            _genericReposity.Delete(id);
+            _genericReposity.Save();
 
             return RedirectToAction("Index");
         }

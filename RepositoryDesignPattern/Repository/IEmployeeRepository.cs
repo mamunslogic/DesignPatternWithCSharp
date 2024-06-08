@@ -3,13 +3,9 @@ using System.Collections.Generic;
 
 namespace RepositoryDesignPattern.Repository
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        IEnumerable<Employee> GetAll();
-        Employee GetById(int EmployeeID);
-        void Insert(Employee employee);
-        void Update(Employee employee);
-        void Delete(int EmployeeID);
-        void Save();
+        IEnumerable<Employee> GetEmployeesByGender(string gender);
+        IEnumerable<Employee> GetEmployeesByDepartment(string department);
     }
 }
