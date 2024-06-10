@@ -12,12 +12,9 @@ namespace RepositoryDesignPattern.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Department
     {
-        public int EmployeeID { get; set; }
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public Nullable<int> Salary { get; set; }
         public int DepartmentID { get; set; }
+        public string Name { get; set; }
     }
 }

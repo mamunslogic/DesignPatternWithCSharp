@@ -16,6 +16,12 @@ namespace RepositoryDesignPattern.Repository
             _dataSet = _dbDataContext.Set<T>();
         }
 
+        public GenericRepository(EmployeeDBDataContext dbDataContext)
+        {
+            _dbDataContext = dbDataContext;
+            _dataSet = _dbDataContext.Set<T>();
+        }
+
         public void Delete(int id)
         {
             var data = _dataSet.Find(id);

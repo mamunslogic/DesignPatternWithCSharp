@@ -126,6 +126,9 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeRedundantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\Department.cs">
+      <DependentUpon>EmployeeDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Employee.cs">
       <DependentUpon>EmployeeDB.tt</DependentUpon>
     </Compile>
@@ -144,14 +147,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repository\DepartmentRepository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IDepartmentRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IEmployeeRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />

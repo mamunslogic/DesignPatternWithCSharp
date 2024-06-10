@@ -6,9 +6,14 @@ namespace RepositoryDesignPattern.Repository
 {
     public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
-        public IEnumerable<Employee> GetEmployeesByDepartment(string department)
+        public EmployeeRepository(EmployeeDBDataContext dbContext):base(dbContext)
         {
-            return _dataSet.Where(s => s.Dept.Equals(department)).ToList();
+            
+        }
+
+        public IEnumerable<Employee> GetEmployeesByDepartment(int departmentId)
+        {
+            return _dataSet.Where(s => s.DepartmentID.Equals(departmentId)).ToList();
         }
 
         public IEnumerable<Employee> GetEmployeesByGender(string gender)

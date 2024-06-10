@@ -1,5 +1,6 @@
 ﻿using RepositoryDesignPattern.DAL;
 using RepositoryDesignPattern.Repository;
+using System;
 using System.Net;
 using System.Web.Mvc;
 
@@ -9,14 +10,17 @@ namespace RepositoryDesignPattern.Controllers
     {
         //private IEmployeeRepository _employeeRepositoy;
 
-        private IGenericRepository<Employee> _genericReposity;
-        private IEmployeeRepository _employeeRepository;
+        //private IGenericRepository<Employee> _genericReposity;
+        //private IEmployeeRepository _employeeRepository;
+
+        private UnitOfWork _unitOfWork;
 
         public EmployeeController()
         {
             //_employeeRepositoy = new EmployeeRepository();
-            _genericReposity = new GenericRepository<Employee>();
-            _employeeRepository = new EmployeeRepository();
+            //_genericReposity = new GenericRepository<Employee>();
+            //_employeeRepository = new EmployeeRepository();
+            _unitOfWork = new UnitOfWork();
         }
 
         //public EmployeeController(IEmployeeRepository employeeRepositoy)
@@ -27,7 +31,7 @@ namespace RepositoryDesignPattern.Controllers
         public ActionResult Index()
         {
             //return View(_genericReposity.GetAll());
-            return View(_employeeRepository.GetEmployeesByGender("Male"));
+            return View(_unitOfWork.EmployeeRepository.GetEmployeesByDepartment(3));
         }
 
         public ActionResult Details(int? id)
@@ -36,7 +40,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _genericReposity.GetById((int)id);
+            Employee employee = _unitOfWork.EmployeeRepository.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -51,12 +55,34 @@ namespace RepositoryDesignPattern.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeID,Name,Gender,Salary,Dept")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeID,Name,Gender,Salary,DepartmentID")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _genericReposity.Insert(employee);
-                _genericReposity.Save();
+                try
+                {
+                    _unitOfWork.CreateTransaction();
+                    if (employee.DepartmentID > 0)
+                    {
+                        var department = _unitOfWork.DepartmentRepository.GetById(employee.DepartmentID);
+                        if (department is null)
+                        {
+                            _unitOfWork.DepartmentRepository.Insert(new Department
+                            {
+                                DepartmentID = employee.DepartmentID,
+                                Name = "New Department"
+                            });
+                        }
+                    }
+                    _unitOfWork.EmployeeRepository.Insert(employee);
+                    _unitOfWork.Save();
+                    //Convert.ToInt16("tt");
+                    _unitOfWork.CommitTransaction();
+                }
+                catch (Exception)
+                {
+                    _unitOfWork.RolebackTransaction();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +95,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _genericReposity.GetById((int)id);
+            Employee employee = _unitOfWork.EmployeeRepository.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -83,8 +109,8 @@ namespace RepositoryDesignPattern.Controllers
         {
             if (ModelState.IsValid)
             {
-                _genericReposity.Update(employee);
-                _genericReposity.Save();
+                _unitOfWork.EmployeeRepository.Update(employee);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(employee);
@@ -96,7 +122,7 @@ namespace RepositoryDesignPattern.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _genericReposity.GetById((int)id);
+            Employee employee = _unitOfWork.EmployeeRepository.GetById((int)id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -108,19 +134,10 @@ namespace RepositoryDesignPattern.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _genericReposity.Delete(id);
-            _genericReposity.Save();
+            _unitOfWork.EmployeeRepository.Delete(id);
+            _unitOfWork.EmployeeRepository.Save();
 
             return RedirectToAction("Index");
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

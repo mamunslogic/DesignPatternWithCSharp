@@ -6,6 +6,6 @@ namespace RepositoryDesignPattern.Repository
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
         IEnumerable<Employee> GetEmployeesByGender(string gender);
-        IEnumerable<Employee> GetEmployeesByDepartment(string department);
+        IEnumerable<Employee> GetEmployeesByDepartment(int departmentId);
     }
 }
