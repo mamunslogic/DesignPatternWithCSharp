@@ -147,10 +147,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\DepartmentRepository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
-    <Compile Include="Repository\IDepartmentRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IEmployeeRepository.cs" />
     <Compile Include="Global.asax.cs">

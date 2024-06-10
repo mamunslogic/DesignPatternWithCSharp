@@ -31,7 +31,8 @@ namespace RepositoryDesignPattern.Controllers
         public ActionResult Index()
         {
             //return View(_genericReposity.GetAll());
-            return View(_unitOfWork.EmployeeRepository.GetEmployeesByDepartment(3));
+            //return View(_unitOfWork.EmployeeRepository.GetEmployeesByDepartment(3));
+            return View(_unitOfWork.EmployeeRepository.GetAll());
         }
 
         public ActionResult Details(int? id)
